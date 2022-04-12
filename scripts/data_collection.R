@@ -5,6 +5,7 @@ library(rtweet)
 library(highcharter)
 library(twinetverse)
 library(visNetwork)
+library(reactable)
 
 # Get Constituyentes Data
 
@@ -14,3 +15,6 @@ library(visNetwork)
 constituyentes <- readRDS(file = "data/constituyentes.rds")
 
 constituyentes_tweets <- get_timeline(constituyentes$screen_name, n = 10)
+
+constituyentes_tweets <- constituyentes_tweets %>% 
+    filter(created_at >= today() - 7)
