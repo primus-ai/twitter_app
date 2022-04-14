@@ -14,13 +14,23 @@ options(reactable.theme = reactableTheme(
 ))
 
 constituyentes_tweets %>% 
-    select(Constituyente = name, Tweet = text, Retweets = retweet_count) %>% 
+    select(Constituyente = name, Tweet = text, Url = status_url, Retweets = retweet_count) %>% 
     arrange(desc(Retweets)) %>% 
     reactable(
         searchable = T,
         resizable = T,
         striped = T,
-        highlight = T
+        highlight = T,
+        columns = list(
+            Constituyente = colDef(),
+            Tweet = colDef(),
+            Url = colDef(
+                cell = function(value) {
+                    htmltools::tags$a(href = value, target = "_blank", value, color = "white")
+                }
+            ),
+            Retweets = colDef()
+        )
     )
     
     

@@ -3,8 +3,8 @@
 ## Build mentions Network
 
 constituyentes_rt_network <- constituyentes_tweets %>% 
-    filter(retweet_screen_name %in% constituyentes$screen_name) %>% 
-    gt_edges(name, toupper(retweet_name), text) %>% 
+    filter(retweet_name %in% constituyentes$name) %>% 
+    gt_edges(name, retweet_name, text) %>% 
     gt_graph()
 
 constituyentes_rt_nodes <- as_data_frame(constituyentes_rt_network, what = "vertices")
